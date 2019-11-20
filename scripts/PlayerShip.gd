@@ -44,7 +44,8 @@ func fire_lasers():
 func create_laser(pos):
     var laser = bullet.instance()
     laser.position = pos
-    Globals.world.add_child(laser)
+    if Globals.world != null:
+        Globals.world.add_child(laser)
 
 
 func _on_ShootTimer_timeout():

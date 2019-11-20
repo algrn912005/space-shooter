@@ -1,6 +1,10 @@
 extends Node2D
 
-const enemy_kamikaze = preload("res://scenes/EnemyKamikaze.tscn")
+# TODO: Add max number of each enemy type as keys in the dict
+const enemies = {
+    "enemy_kamikaze": preload("res://scenes/EnemyKamikaze.tscn"),
+    "enemy_clever": preload("res://scenes/EnemyClever.tscn")
+}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,8 +12,14 @@ func _ready():
     randomize()
 
 
-func spawn():
-    var enemy_instance = enemy_kamikaze.instance()
+func spawn() -> void:
+    var enemy_type = enemies.keys()[randi() % enemies.size()]
+    # Prevent more than 2 of any single kind of enemy
+    var enemy_size = get_tree().get_nodes_in_group(enemy_type).size()
+    if enemy_size >= 2:
+        return
+
+    var enemy_instance = enemies[enemy_type].instance()
     var pos = Vector2()
     var sprite_width = (  # Get sprite's width dynamically
         enemy_instance.get_node("Sprite").texture.get_size().x
@@ -25,5 +35,5 @@ func spawn():
 
 
 func _on_Timer_timeout():
-    $SpawnTimer.wait_time = rand_range(1, 4)
+    $SpawnTimer.wait_time = rand_range(1, 3)
     spawn()

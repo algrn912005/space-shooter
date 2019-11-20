@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/Lasers/laserGreen13.png" type="Texture" id=2]
+[ext_resource path="res://assets/Lasers/laserRed04.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.31568, 9.29075 )
+extents = Vector2( 3.30041, 9.2928 )
 
-[node name="PlayerBullet" index="0" instance=ExtResource( 1 )]
-velocity = Vector2( 0, -350 )
+[node name="EnemyBullet" instance=ExtResource( 1 )]
+velocity = Vector2( 0, 150 )
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )
@@ -17,4 +17,6 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" parent="." index="2"]
-rect = Rect2( -2.5, -9.3, 5, 18.5 )
+rect = Rect2( -3.44, -9.15, 6.84, 18.44 )
+
+[node name="FlareContainer" type="Node" parent="." index="3"]
