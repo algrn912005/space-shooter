@@ -22,5 +22,4 @@ func _process(delta: float) -> void:
 func _on_CannonTimer_timeout() -> void:
     var laser = laser_scene.instance()
     laser.position = $Cannon.global_position
-    if Globals.world != null:
-        Globals.world.add_child(laser)
+    Globals.add_child_to_world(laser)

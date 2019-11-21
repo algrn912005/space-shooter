@@ -6,6 +6,7 @@ const LERP_NORMAL_VALUE := 0.15
 
 const bullet: = preload("res://scenes/PlayerBullet.tscn")
 const explosion_scene: = preload("res://scenes/Explosion.tscn")
+const hitflash_scene: = preload("res://scenes/HitFlash.tscn")
 
 
 export var shoot_timer: = 0.8
@@ -69,9 +70,16 @@ func _on_ShootTimer_timeout() -> void:
     can_shoot = true
 
 
+func create_flash() -> void:
+    var flash: = hitflash_scene.instance()
+    Globals.add_child_to_world(flash)
+
+
 func _on_PlayerShip_area_entered(area: Area2D) -> void:
     if area.get_collision_layer_bit(3):  # Enemy bullet
         set_health(health - 1)
+        create_flash()
         area.queue_free()
     if area.get_collision_layer_bit(2):  # Enemy ship
+        create_flash()
         set_health(0)
