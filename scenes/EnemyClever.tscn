@@ -10,19 +10,18 @@ extents = Vector2( 26.1116, 21.2405 )
 [node name="EnemyClever" groups=[
 "enemy_clever",
 ] instance=ExtResource( 2 )]
-position = Vector2( 121.638, 52.3107 )
 script = ExtResource( 3 )
-velocity = Vector2( 75, 50 )
+velocity = Vector2( 75, 75 )
+health = 6
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Cannon" type="Position2D" parent="." index="2"]
-position = Vector2( -0.550919, 12.3974 )
+position = Vector2( -0.550919, 17.1195 )
 
 [node name="CannonTimer" type="Timer" parent="." index="3"]
 autostart = true

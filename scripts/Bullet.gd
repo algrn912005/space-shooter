@@ -13,11 +13,13 @@ func _process(delta: float) -> void:
     translate(velocity * delta)
     
 
-func create_flare() -> void:
+func create_flare(global: bool = false) -> void:
     var flare = flare_scene.instance()
     flare.position = get_position()
-    if Globals.world != null:
+    if global:
         Globals.world.add_child(flare)
+    else:
+        $FlareContainer.add_child(flare)
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:

@@ -20,8 +20,9 @@ tracks/0/keys = {
 }
 
 [node name="BulletFlare" type="Sprite"]
+modulate = Color( 1, 1, 1, 0 )
 scale = Vector2( 0.3, 0.3 )
-z_index = 5
+z_index = -1
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

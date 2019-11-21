@@ -1,22 +1,25 @@
 extends Area2D
 
-const LERP_NORMAL_VALUE = 0.2
+const LERP_NORMAL_VALUE := 0.15
 
-const bullet = preload("res://scenes/PlayerBullet.tscn")
-
-
-export var shoot_timer = 0.8
-var can_shoot = true
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
+const bullet: = preload("res://scenes/PlayerBullet.tscn")
+const explosion_scene: = preload("res://scenes/Explosion.tscn")
 
 
-func _process(delta):
+export var shoot_timer: = 0.8
+export var health: = 3
+var can_shoot: = true
+
+onready var view_size = get_viewport_rect().size
+onready var ship_width = ($Sprite.texture.get_size().x * $Sprite.scale.x) / 2
+
+
+func _ready() -> void:
+    pass
+
+
+func _process(delta: float) -> void:
     # Clamp ship position.x within game bounds
-    var view_size = get_viewport_rect().size
-    var ship_width = ($Sprite.texture.get_size().x * $Sprite.scale.x) / 2
     position.x = clamp(
         lerp(
             position.x,
@@ -32,21 +35,40 @@ func _process(delta):
         can_shoot = false
         $ShootTimer.wait_time = shoot_timer
         $ShootTimer.start()
-    
 
-func fire_lasers():
+
+func set_health(new_health: int) -> void:
+    health = new_health
+    if health <= 0:
+        create_explosion()
+        queue_free()
+        
+func create_explosion() -> void:
+    var exp_instance = explosion_scene.instance()
+    exp_instance.position = position
+    Globals.add_child_to_world(exp_instance)
+
+
+func fire_lasers() -> void:
     var left_cannon = $Cannons/Left.global_position
     var right_cannon = $Cannons/Right.global_position
     create_laser(left_cannon)
     create_laser(right_cannon)
 
 
-func create_laser(pos):
+func create_laser(pos: Vector2) -> void:
     var laser = bullet.instance()
     laser.position = pos
-    if Globals.world != null:
-        Globals.world.add_child(laser)
+    Globals.add_child_to_world(laser)
 
 
-func _on_ShootTimer_timeout():
+func _on_ShootTimer_timeout() -> void:
     can_shoot = true
+
+
+func _on_PlayerShip_area_entered(area: Area2D) -> void:
+    if area.get_collision_layer_bit(3):  # Enemy bullet
+        set_health(health - 1)
+        area.queue_free()
+    if area.get_collision_layer_bit(2):  # Enemy ship
+        set_health(0)

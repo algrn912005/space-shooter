@@ -6,10 +6,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.584, 12.8287 )
 
-[node name="EnemyKamikaze" index="0" groups=[
+[node name="EnemyKamikaze" groups=[
 "enemy_kamikaze",
 ] instance=ExtResource( 1 )]
 velocity = Vector2( 0, 450 )
+health = 2
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.3, 0.3 )
