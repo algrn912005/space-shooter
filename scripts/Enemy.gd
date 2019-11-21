@@ -1,5 +1,7 @@
 extends Area2D
 
+signal camera_shake_requested
+
 const explosion_scene = preload("res://scenes/Explosion.tscn")
 
 export var velocity: = Vector2()
@@ -7,7 +9,8 @@ export var health: = 0
 
 
 func _ready() -> void:
-    pass
+    # Connect the shake signal to the method in the camera
+    connect("camera_shake_requested", Globals.world.get_node("Camera"), "_on_camera_shake_requested")
 
 
 func _process(delta: float) -> void:
@@ -18,6 +21,7 @@ func _process(delta: float) -> void:
 func set_health(new_health: int) -> void:
     health = new_health
     if health <= 0:
+        emit_signal("camera_shake_requested")
         create_explosion()
         queue_free()
 

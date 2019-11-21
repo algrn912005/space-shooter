@@ -1,5 +1,7 @@
 extends Area2D
 
+signal camera_shake_requested
+
 const LERP_NORMAL_VALUE := 0.15
 
 const bullet: = preload("res://scenes/PlayerBullet.tscn")
@@ -40,6 +42,7 @@ func _process(delta: float) -> void:
 func set_health(new_health: int) -> void:
     health = new_health
     if health <= 0:
+        emit_signal("camera_shake_requested")
         create_explosion()
         queue_free()
         
