@@ -60,3 +60,4 @@ margin_bottom = 19.9665
 custom_fonts/font = SubResource( 1 )
 text = "Quit"
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
