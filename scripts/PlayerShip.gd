@@ -1,6 +1,7 @@
 extends Area2D
 
 signal camera_shake_requested
+signal health_change(health)
 
 const LERP_NORMAL_VALUE := 0.15
 
@@ -10,7 +11,7 @@ const hitflash_scene: = preload("res://scenes/HitFlash.tscn")
 
 
 export var shoot_timer: = 0.8
-export var health: = 3
+export var health: = 5
 var can_shoot: = true
 
 onready var view_size = get_viewport_rect().size
@@ -42,6 +43,7 @@ func _process(delta: float) -> void:
 
 func set_health(new_health: int) -> void:
     health = new_health
+    emit_signal("health_change", health)
     if health <= 0:
         emit_signal("camera_shake_requested")
         create_explosion()
