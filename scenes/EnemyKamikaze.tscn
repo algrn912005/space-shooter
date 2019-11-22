@@ -11,6 +11,7 @@ extents = Vector2( 14.584, 12.8287 )
 ] instance=ExtResource( 1 )]
 velocity = Vector2( 0, 450 )
 health = 2
+points = 2
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.3, 0.3 )

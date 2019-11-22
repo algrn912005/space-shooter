@@ -6,6 +6,7 @@ const explosion_scene = preload("res://scenes/Explosion.tscn")
 
 export var velocity: = Vector2()
 export var health: = 0
+export var points: = 5
 
 
 func _ready() -> void:
@@ -19,8 +20,10 @@ func _process(delta: float) -> void:
 
 
 func set_health(new_health: int) -> void:
+    if is_queued_for_deletion(): return
     health = new_health
     if health <= 0:
+        Globals.score += points
         emit_signal("camera_shake_requested")
         create_explosion()
         queue_free()

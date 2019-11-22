@@ -7,6 +7,5 @@ func _ready():
     pass # Replace with function body.
 
 
-
 func _on_PlayerShip_health_change(health):
     frame = health   

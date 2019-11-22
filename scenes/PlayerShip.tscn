@@ -71,6 +71,7 @@ one_shot = true
 [node name="ShipThruster" parent="." instance=ExtResource( 3 )]
 position = Vector2( -7.62939e-006, 27.6114 )
 z_index = -1
+frame = 1
 
 [node name="Particles2D" type="Particles2D" parent="."]
 show_behind_parent = true
