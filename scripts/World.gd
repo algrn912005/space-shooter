@@ -18,4 +18,8 @@ func _on_MenuButton_pressed():
 func _on_PlayerShip_tree_exited():
     $EnemySpawner/SpawnTimer.stop()
     $PowerupSpawner/SpawnTimer.stop()
-    $MenuButton.show()
+    $GameOver/GameOverLabel/ShowGameOverAnim.play("show_game_over")
+
+
+func _on_ShowGameOverAnim_animation_finished(anim_name):
+    $GameOver/MenuButton.show()
