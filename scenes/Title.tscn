@@ -7,13 +7,13 @@
 [ext_resource path="res://scripts/Title.gd" type="Script" id=5]
 [ext_resource path="res://assets/UI/ButtonPressed.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "show_title"
 length = 3.0
 tracks/0/type = "value"
@@ -43,7 +43,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -58,7 +58,7 @@ margin_left = 39.71
 margin_top = 83.03
 margin_right = 228.71
 margin_bottom = 197.03
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Generic 
 Space 
 Shooter"
@@ -70,7 +70,7 @@ __meta__ = {
 }
 
 [node name="ShowTitleAnim" type="AnimationPlayer" parent="."]
-anims/show_title = SubResource( 3 )
+anims/show_title = SubResource( 2 )
 
 [node name="StartButton" type="TextureButton" parent="."]
 margin_left = 98.0
@@ -91,7 +91,7 @@ margin_left = 13.1158
 margin_top = 1.96647
 margin_right = 64.1158
 margin_bottom = 19.9665
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Start"
 
 [node name="QuitButton" type="TextureButton" parent="."]
@@ -113,7 +113,7 @@ margin_left = 18.6768
 margin_top = 1.96647
 margin_right = 69.6768
 margin_bottom = 19.9665
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Quit"
 
 [node name="RepeatTitleAnim" type="Timer" parent="."]

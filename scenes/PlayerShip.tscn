@@ -81,5 +81,10 @@ amount = 80
 lifetime = 0.54
 visibility_rect = Rect2( -64.73, -68.18, 125.55, 100 )
 process_material = SubResource( 6 )
+
+[node name="DoubleshootTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_PlayerShip_area_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="DoubleshootTimer" to="." method="_on_DoubleshootTimer_timeout"]

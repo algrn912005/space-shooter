@@ -1,7 +1,7 @@
 extends Area2D
 
 signal camera_shake_requested
-signal health_change(health)
+signal health_change(new_health)
 
 const LERP_NORMAL_VALUE := 0.15
 
@@ -11,7 +11,10 @@ const hitflash_scene: = preload("res://scenes/HitFlash.tscn")
 
 
 export var shoot_timer: = 0.8
-export var health: = 5
+export var max_health: = 5
+
+var health: = max_health setget set_health
+var double_shoot_powerup: = false setget set_double_shoot
 var can_shoot: = true
 
 onready var view_size = get_viewport_rect().size
@@ -41,13 +44,20 @@ func _process(delta: float) -> void:
         $ShootTimer.start()
 
 
-func set_health(new_health: int) -> void:
-    health = new_health
-    emit_signal("health_change", health)
+func set_health(new_value: int) -> void:
+    if new_value > max_health: return  # Already at max health
+    emit_signal("health_change", new_value)
+    health = new_value
     if health <= 0:
         emit_signal("camera_shake_requested")
         create_explosion()
         queue_free()
+        
+func set_double_shoot(new_value: bool) -> void:
+    double_shoot_powerup = new_value
+    
+    if double_shoot_powerup:
+        $DoubleshootTimer.start()
         
 func create_explosion() -> void:
     var exp_instance = explosion_scene.instance()
@@ -60,12 +70,20 @@ func fire_lasers() -> void:
     var right_cannon = $Cannons/Right.global_position
     create_laser(left_cannon)
     create_laser(right_cannon)
+    
+    # TODO: Make it scale up to 4 extra extra
+    if double_shoot_powerup:
+        var left_cannon_2 = create_laser(left_cannon)
+        var right_cannon_2 = create_laser(right_cannon)
+        left_cannon_2.velocity.x = -25
+        right_cannon_2.velocity.x = 25
 
 
-func create_laser(pos: Vector2) -> void:
+func create_laser(pos: Vector2) -> PackedScene:
     var laser = bullet.instance()
     laser.position = pos
     Globals.add_child_to_world(laser)
+    return laser
 
 
 func _on_ShootTimer_timeout() -> void:
@@ -85,3 +103,7 @@ func _on_PlayerShip_area_entered(area: Area2D) -> void:
     if area.get_collision_layer_bit(2):  # Enemy ship
         create_flash()
         set_health(0)
+
+
+func _on_DoubleshootTimer_timeout():
+    set_double_shoot(false)

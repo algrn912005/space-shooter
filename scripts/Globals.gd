@@ -1,6 +1,7 @@
 extends Node
 
 var world = null
+# warning-ignore:unused_class_variable
 var score = 0
 
 
