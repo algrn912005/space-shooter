@@ -8,6 +8,8 @@ const powerups = {
 
 
 func _ready():
+    $SpawnTimer.wait_time = rand_range(10, 15)
+    $SpawnTimer.start()
     randomize()
 
 
@@ -33,6 +35,6 @@ func spawn() -> void:
     $Container.add_child(powerup_instance)
 
 
-func _on_SpawnTimer_timeout():    
-    $SpawnTimer.wait_time = rand_range(1, 3)
+func _on_SpawnTimer_timeout():
+    $SpawnTimer.wait_time = rand_range(10, 15)
     spawn()
