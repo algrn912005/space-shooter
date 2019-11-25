@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 
 
 func _on_CannonTimer_timeout() -> void:
+    $AudioPlayer/LaserSound.play()
     var laser = laser_scene.instance()
     laser.position = $Cannon.global_position
     Globals.add_child_to_world(laser)

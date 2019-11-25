@@ -2,6 +2,7 @@ extends AnimatedSprite
 
 
 func _ready():
+    $ExplosionSound.play()
     $Smoke.emitting = true
     $Flare.emitting = true
     playing = true

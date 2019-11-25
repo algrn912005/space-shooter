@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
     )
     
     if can_shoot:
+        $Audio/Laser.play()
         fire_lasers()
         can_shoot = false
         $ShootTimer.wait_time = shoot_timer
@@ -45,6 +46,8 @@ func _process(delta: float) -> void:
 
 
 func set_health(new_value: int) -> void:
+    if new_value > health:
+        $Audio/HealthPickup.play()
     if new_value > max_health: return  # Already at max health
     emit_signal("health_change", new_value)
     health = new_value
@@ -57,6 +60,7 @@ func set_double_shoot(new_value: bool) -> void:
     double_shoot_powerup = new_value
     
     if double_shoot_powerup:
+        $Audio/DoubleShootPickup.play()
         $DoubleshootTimer.start()
         
 func create_explosion() -> void:
@@ -99,6 +103,7 @@ func _on_PlayerShip_area_entered(area: Area2D) -> void:
     if area.get_collision_layer_bit(3):  # Enemy bullet
         set_health(health - 1)
         create_flash()
+        $Audio/OnHit.play()
         area.queue_free()
     if area.get_collision_layer_bit(2):  # Enemy ship
         create_flash()

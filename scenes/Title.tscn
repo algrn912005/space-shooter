@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/StarField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/kenvector_future_thin.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/UI/Button.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Title.gd" type="Script" id=5]
 [ext_resource path="res://assets/UI/ButtonPressed.png" type="Texture" id=6]
+[ext_resource path="res://assets/sfx/music/Level 1.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -119,6 +120,10 @@ text = "Quit"
 [node name="RepeatTitleAnim" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="RepeatTitleAnim" to="." method="_on_RepeatTitleAnim_timeout"]

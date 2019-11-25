@@ -51,6 +51,7 @@ func _on_Enemy_area_entered(area: Area2D) -> void:
         set_health(0)
         area.queue_free()
     elif area.get_collision_layer_bit(1):  # Player bullet
+        $AudioPlayer/OnHit.play()
         set_health(health - 1)
         area.create_flare(true)
         area.queue_free()

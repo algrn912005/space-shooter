@@ -6,9 +6,12 @@ const powerups = {
     "powerup_doubleshoot": preload("res://scenes/PowerupDoubleShoot.tscn")
 }
 
+var RANDOM_MIN = 1
+var RANDOM_MAX = 3
+
 
 func _ready():
-    $SpawnTimer.wait_time = rand_range(10, 15)
+    $SpawnTimer.wait_time = rand_range(RANDOM_MIN, RANDOM_MAX)
     $SpawnTimer.start()
     randomize()
 
@@ -36,5 +39,5 @@ func spawn() -> void:
 
 
 func _on_SpawnTimer_timeout():
-    $SpawnTimer.wait_time = rand_range(10, 15)
+    $SpawnTimer.wait_time = rand_range(RANDOM_MIN, RANDOM_MAX)
     spawn()
