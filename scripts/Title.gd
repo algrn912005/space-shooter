@@ -12,7 +12,6 @@ func _on_StartButton_pressed():
 
 
 func _on_QuitButton_pressed():
-    Globals.store_high_score()
     get_tree().quit()
 
 

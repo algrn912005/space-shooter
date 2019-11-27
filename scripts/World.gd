@@ -17,6 +17,7 @@ func _exit_tree():
 
 
 func _on_MenuButton_pressed():
+    Globals.store_high_score()
     get_tree().change_scene("res://scenes/Title.tscn")
 
 
@@ -29,6 +30,7 @@ func _on_PlayerShip_tree_exited():
         $AudioPlayer/PlayerStart.stop()
     fade_out_music($AudioPlayer/Music)
     $AudioPlayer/GameOver.play()
+    Globals.process_high_score()
 
 
 func _on_ShowGameOverAnim_animation_finished(anim_name):
