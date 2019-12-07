@@ -41,8 +41,18 @@ func store_high_score() -> void:
     out_file.close()
     
 
+func is_high_score() -> bool:
+    var temp = highscore.duplicate(true)
+    temp.append(["", score])
+    temp.sort_custom(HighScoreSorter, "sort")           
+    temp.pop_back()
+    if temp == highscore:
+        return false
+    return true
+
+
 func process_high_score(name: ="") -> void:
-    highscore.append(["Alvin", score])
+    highscore.append([name, score])
     highscore.sort_custom(HighScoreSorter, "sort")           
     highscore.pop_back()
 

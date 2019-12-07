@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/StarField.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/sfx/ship_starting.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/music/Title Screen.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sfx/music/Ending.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/HighScoreInput.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
@@ -103,6 +104,13 @@ __meta__ = {
 
 [node name="GameOver" type="Node" parent="."]
 
+[node name="HighScoreInput" parent="GameOver" instance=ExtResource( 14 )]
+visible = false
+margin_left = 61.1289
+margin_top = 165.59
+margin_right = 101.129
+margin_bottom = 205.59
+
 [node name="MenuButton" type="TextureButton" parent="GameOver"]
 visible = false
 margin_left = 98.0
@@ -132,14 +140,14 @@ __meta__ = {
 
 [node name="GameOverLabel" type="Label" parent="GameOver"]
 margin_left = 21.913
-margin_top = 130.231
+margin_top = 234.732
 margin_right = 253.913
-margin_bottom = 244.231
+margin_bottom = 348.732
 custom_fonts/font = SubResource( 5 )
 text = "Game Over"
 align = 1
 valign = 1
-percent_visible = 1.32455e-06
+percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

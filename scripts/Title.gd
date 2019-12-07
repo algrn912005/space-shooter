@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
+    Globals.score = 0
     var scores = Globals.load_high_scores()
     $ShowTitleAnim.play("show_title")
     set_scores(scores)

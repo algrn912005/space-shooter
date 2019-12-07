@@ -193,7 +193,6 @@ text = "1. algrn912005 - 500
 3. ANON - 100
 4. ANON - 50
 5. ANON - 30"
-percent_visible = -0.0166667
 max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false

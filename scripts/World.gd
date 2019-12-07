@@ -30,12 +30,12 @@ func _on_PlayerShip_tree_exited():
         $AudioPlayer/PlayerStart.stop()
     fade_out_music($AudioPlayer/Music)
     $AudioPlayer/GameOver.play()
-    Globals.process_high_score()
 
 
 func _on_ShowGameOverAnim_animation_finished(anim_name):
     $GameOver/MenuButton.show()
-
+    if Globals.is_high_score():
+        $GameOver/HighScoreInput.visible = true
 
 
 func fade_out_music(player: AudioStreamPlayer) -> void:
